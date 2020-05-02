@@ -1,19 +1,40 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Weather} from './weather.model';
+import {Weather} from '../models/weather.model';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class WeatherService {
-
-  API = 'https://api.openweathermap.org/data/2.5/weather?q=Kalush&APPID=35e6b70f1bac68f858a0761ec80c4ff0';
-
+  city = 'Kalush';
+  APIKey = '35e6b70f1bac68f858a0761ec80c4ff0';
+  // API = 'https://api.openweathermap.org/data/2.5/weather?q=' + this.city + '&APPID=' + this.APIKey;
+  API = 'https://api.openweathermap.org/data/2.5/weather';
   constructor(private http: HttpClient) {
   }
 
-  getWeather(): Observable<Weather>{
-    return this.http.get<Weather>(this.API);
+  getWeatherByCoords(lat, lon){
+    const params = new HttpParams()
+      .set('lat', lat)
+      .set('lon', lon)
+      .set('units', 'imperial')
+      .set('appid', this.APIKey);
+
+    return this.http.get(this.API, {params});
   }
+  // getWeatherByCoords(lat, lon): Observable<Weather>{
+  //   const params = new HttpParams()
+  //     .set('lat', lat)
+  //     .set('lon', lon)
+  //     .set('units', 'imperial')
+  //     .set('appid', this.APIKey)
+  //
+  //   return this.http.get<Weather>(this.API, {params});
+  // }
+
+  // getWeather(): Observable<Weather>{
+  //   return this.http.get<Weather>(this.API);
+  // }
 }
