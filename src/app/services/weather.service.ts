@@ -8,7 +8,7 @@ import {Weather} from './weather.model';
 })
 export class WeatherService {
 
-  API = 'https://api.openweathermap.org/data/2.5/weather?q=Lviv&APPID=35e6b70f1bac68f858a0761ec80c4ff0';
+  API = 'https://api.openweathermap.org/data/2.5/weather?q=Kalush&APPID=35e6b70f1bac68f858a0761ec80c4ff0';
 
   constructor(private http: HttpClient) {
   }
